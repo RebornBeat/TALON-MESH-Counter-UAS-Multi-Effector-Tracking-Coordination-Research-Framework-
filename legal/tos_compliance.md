@@ -1,6 +1,3 @@
-Here is the fully updated, corrected, and expanded `legal/tos_compliance.md` file for **TALON-MESH**. This document addresses every relevant aspect of GitHub’s Terms of Service and Acceptable Use Policies, ensuring the project remains compliant while maximizing the scope of permissible research.
-
-```markdown
 # Terms of Service (ToS) Compliance — TALON-MESH
 
 **Project:** TALON-MESH
