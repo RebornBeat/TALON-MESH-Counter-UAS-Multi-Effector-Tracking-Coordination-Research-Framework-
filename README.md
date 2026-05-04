@@ -157,13 +157,16 @@ talon-mesh/
 │   │   ├── effector_abstraction.md
 │   │   └── future_research.md
 │   ├── api/
+│   │   └── simulator_api.md
 │   └── assets/
+│       └── diagrams/
 ├── hardware/                  # PLACEHOLDER — explicit out-of-scope notice
 │   └── README.md
 ├── firmware/                  # PLACEHOLDER
 │   └── README.md
 ├── software/
 │   ├── simulator/             # Scenario harness + Atmospheric models
+│   │   └── atmospheric_models.md
 │   ├── perception/            # Sensor fusion + PentaTrack
 │   ├── decision/              # Assignment + LOS optimizer + Multi-center planner
 │   ├── effector/              # Opaque ABC + simulated reference
