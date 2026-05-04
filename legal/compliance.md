@@ -1,7 +1,7 @@
 # Legal Compliance & Regulatory Posture — TALON-MESH
 
 **Document Status:** Active
-**Last Updated:** [Current Date]
+**Last Updated:** 05/04/2026
 **Applicability:** This document applies to the TALON-MESH repository, its maintainers, contributors, and all downstream users.
 
 ## 1. Purpose and Scope
