@@ -1,4 +1,4 @@
-# 4. TALON-MESH — Counter-UAS Multi-Effector Tracking Coordination (Research Framework)
+# TALON-MESH — Counter-UAS Multi-Effector Tracking Coordination (Research Framework)
 
 **An open research and simulation framework for studying multi-target, multi-center, multi-effector coordination problems in counter-UAS perception and decision systems.**
 
@@ -46,6 +46,32 @@ Both problems are computationally interesting and directly transfer to civilian 
 
 ---
 
+## Algorithmic Innovations
+
+TALON-MESH's algorithmic contributions are concentrated in `software/decision/`, the assignment and engagement-planning module. Three innovations are documented in detail in the theory directory.
+
+### Multi-Center Engagement
+
+Traditional one-effector-on-one-target architectures aim at the target's *best estimated position* and accept the resulting hit-probability distribution. TALON-MESH's approach exploits PentaTrack's predictive-center field: when an array has multiple independently-aimable elements, it can address several of the target's highest-probability predicted future positions simultaneously, increasing the joint probability that at least one element addresses the target's actual future position.
+
+The optimization formulation is weighted set-cover-with-budget over the predictive-center distribution. The submodular-optimization literature provides approximation algorithms with provable bounds; the online and adversarial variants are open research questions TALON-MESH's simulator is designed to study.
+
+See `docs/theory/multi_effector_arrays.md` for the full treatment.
+
+### Line-of-Sight Aware Assignment
+
+The naive assignment policy minimizes target-to-effector distance. The realistic policy must account for line-of-sight: an effector with the shortest path to the target is useless if a building, terrain feature, or other obstruction lies along that path. TALON-MESH's assignment optimizer treats line-of-sight as a primary constraint rather than a post-hoc filter, enabling assignments that prefer slightly more distant effectors with clear paths over closer effectors with blocked paths.
+
+See `docs/theory/line_of_sight_geometry.md` for the geometric framework and the assignment-cost function.
+
+### Multi-Target Coordination Under Saturation
+
+When N (targets) > M (effectors), the system cannot address every target. Coordination policies under saturation are documented at the architectural level — the maintainers do not implement specific saturation-response policies in this repository, because such policies bind regulatory, ethical, and operator-certification questions that the repository is not the appropriate venue for. Researchers and qualified parties pursuing operational-policy research are referred to the published academic counter-UAS and air-traffic-management literature.
+
+See `docs/theory/future_research.md` for the full research-domain map.
+
+---
+
 ## Architecture
 
 ```
@@ -66,6 +92,7 @@ Both problems are computationally interesting and directly transfer to civilian 
 │  Decision Layer                                              │
 │  ────────────────                                            │
 │  Multi-target effector-assignment optimizer                  │
+│  Line-of-Sight (LOS) geometry constraint solver              │
 │  Multi-center single-target engagement planner               │
 │  Latency / confidence / priority weighting                   │
 ├──────────────────────────────────────────────────────────────┤
@@ -120,11 +147,15 @@ This is enforced by repository policy. Pull requests that introduce hardware int
 talon-mesh/
 ├── docs/
 │   ├── guides/
+│   │   └── getting_started.md
 │   ├── theory/
 │   │   ├── multi_center_engagement.md
+│   │   ├── multi_effector_arrays.md
+│   │   ├── line_of_sight_geometry.md
 │   │   ├── assignment_optimization.md
 │   │   ├── perception_fusion.md
-│   │   └── effector_abstraction.md
+│   │   ├── effector_abstraction.md
+│   │   └── future_research.md
 │   ├── api/
 │   └── assets/
 ├── hardware/                  # PLACEHOLDER — explicit out-of-scope notice
@@ -132,9 +163,9 @@ talon-mesh/
 ├── firmware/                  # PLACEHOLDER
 │   └── README.md
 ├── software/
-│   ├── simulator/             # Scenario harness
+│   ├── simulator/             # Scenario harness + Atmospheric models
 │   ├── perception/            # Sensor fusion + PentaTrack
-│   ├── decision/              # Assignment + multi-center planner
+│   ├── decision/              # Assignment + LOS optimizer + Multi-center planner
 │   ├── effector/              # Opaque ABC + simulated reference
 │   ├── viz/                   # 3D scenario visualization
 │   ├── cli/
@@ -183,12 +214,13 @@ All scenarios are virtual. Outputs are HTML reports, scenario renders, and CSV b
 
 ## Civilian Transfer
 
-The same algorithms in `decision/` directly apply to:
+The same algorithms in `software/decision/` directly apply to:
 
-- Multi-cobot pick-and-place where M cobots service a moving conveyor with N items.
-- Multi-camera sports tracking where M PTZ cameras must cover N players.
-- Multi-drone agricultural inspection where M drones must cover N field plots under time pressure.
-- Multi-vehicle dispatch.
+- **Multi-cobot pick-and-place:** M cobots service a moving conveyor with N items; overlapping workspaces require set-cover optimization.
+- **Multi-camera sports tracking:** M PTZ cameras must cover N players; line-of-sight is blocked by other players; assignment optimizes for coverage continuity.
+- **Multi-drone agricultural inspection:** M drones must cover N field plots under time pressure; terrain blocks direct paths to some plots.
+- **Multi-vehicle dispatch:** Vehicles service requests across a city; traffic and road closures introduce "line-of-sight" (traversability) constraints.
+- **Multi-arm robotic surgery:** Multiple arms must cooperate on a procedure; arms' workspaces overlap; coordination is the multi-element-on-single-target case.
 
 The `examples/` directory will include at least one civilian scenario for each algorithm to make this transfer concrete.
 
@@ -196,10 +228,10 @@ The `examples/` directory will include at least one civilian scenario for each a
 
 ## Roadmap
 
-- Phase 1 (current): assignment optimizer + simulated effector ABC.
-- Phase 2: multi-center engagement planner + PentaTrack integration.
-- Phase 3: published benchmark scenarios for reproducible counter-UAS *perception/decision* research.
-- Phase 4: civilian-transfer examples (cobot, sports, agricultural).
+- **Phase 1 (current):** Assignment optimizer + simulated effector ABC + LOS geometry constraints.
+- **Phase 2:** Multi-center engagement planner + PentaTrack integration.
+- **Phase 3:** Published benchmark scenarios for reproducible counter-UAS *perception/decision* research.
+- **Phase 4:** Civilian-transfer examples (cobot, sports, agricultural).
 
 There is no Phase N for hardware. By design.
 
@@ -207,4 +239,4 @@ There is no Phase N for hardware. By design.
 
 ## License
 
-MIT for code. CC BY 4.0 for documentation. See `LICENSE`, `legal/compliance.md`, and `legal/export_control_posture.md`
+MIT for code. CC BY 4.0 for documentation. See `LICENSE`, `legal/compliance.md`, and `legal/export_control_posture.md`.
