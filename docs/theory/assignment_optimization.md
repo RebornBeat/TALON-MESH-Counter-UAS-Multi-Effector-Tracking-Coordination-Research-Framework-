@@ -1,7 +1,3 @@
-Here is the fully updated, corrected, and expanded `docs/theory/assignment_optimization.md` file for **TALON-MESH**. This document is complete, with no omissions or truncations.
-
----
-
 # Assignment Optimization — Algorithmic Strategies for Multi-Effector Coordination
 
 **Project:** TALON-MESH
@@ -207,5 +203,3 @@ These algorithms are mathematically identical to problems in logistics and robot
 TALON-MESH's assignment optimization layer is the bridge between **Perception** (what is out there?) and **Action** (what do we do?).
 
 It moves beyond simple distance-minimization to a sophisticated, constraint-aware, probability-maximizing engine. By implementing the **Greedy Set Cover with Budget** strategy integrated with **Line-of-Sight** physics, TALON-MESH provides a realistic research substrate for studying how autonomous systems can coordinate resources against uncertain, dynamic threats.
-
----
