@@ -1,0 +1,119 @@
+<svg width="800px" height="650px" viewBox="0 0 800 650" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f8fafc" />
+
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#1e293b">Multi-Effector Assignment Architecture</text>
+  <text x="400" y="50" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">LOS-Aware &amp; Multi-Center Optimization</text>
+
+  <!-- Definitions -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Perception Input -->
+  <g transform="translate(50, 80)">
+    <rect width="180" height="100" rx="4" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#shadow)" />
+    <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e40af">Perception Layer</text>
+    <text x="90" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">Multi-Modal Fusion</text>
+    <text x="90" y="60" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">Radar + Acoustic + RF</text>
+    <text x="90" y="75" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">DetectionEvent Stream</text>
+  </g>
+
+  <!-- Layer 2: PentaTrack -->
+  <g transform="translate(300, 80)">
+    <rect width="200" height="100" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="2" filter="url(#shadow)" />
+    <text x="100" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#166534">PentaTrack Bridge</text>
+    <text x="100" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">Predictive Center Field</text>
+    <text x="100" y="60" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">Velocity Weighting</text>
+    <text x="100" y="75" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">Drift Analysis</text>
+    <!-- Sub-box for emphasis -->
+    <rect x="20" y="55" width="160" height="30" rx="2" fill="#dcfce7" stroke="#86efac" />
+    <text x="100" y="73" font-family="Arial, sans-serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#166534">9 Weighted Centers</text>
+  </g>
+
+  <!-- Arrow: Perception to PentaTrack -->
+  <line x1="230" y1="130" x2="295" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="262" y="125" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#64748b">Fused Track</text>
+
+  <!-- Layer 3: Geometry Engine -->
+  <g transform="translate(570, 80)">
+    <rect width="180" height="100" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" filter="url(#shadow)" />
+    <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#92400e">Geometry Engine</text>
+    <text x="90" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">LOS Ray-March</text>
+    <text x="90" y="60" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">Atmospheric Model</text>
+    <text x="90" y="75" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">Shadow Cone Calc</text>
+  </g>
+
+  <!-- Arrow: PentaTrack to Geometry -->
+  <line x1="500" y1="130" x2="565" y2="130" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="532" y="125" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#64748b">Center Field</text>
+
+  <!-- Layer 4: Decision Layer (The Core) -->
+  <g transform="translate(175, 250)">
+    <rect width="450" height="150" rx="6" fill="#ffffff" stroke="#6366f1" stroke-width="3" filter="url(#shadow)" />
+    <text x="225" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#4338ca">Decision Layer</text>
+    
+    <!-- Internal boxes -->
+    <g transform="translate(15, 40)">
+      <rect width="130" height="50" rx="2" fill="#e0e7ff" stroke="#a5b4fc" />
+      <text x="65" y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#3730a3">Effector Array</text>
+      <text x="65" y="35" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">N Slots</text>
+    </g>
+
+    <g transform="translate(160, 40)">
+      <rect width="130" height="50" rx="2" fill="#e0e7ff" stroke="#a5b4fc" />
+      <text x="65" y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#3730a3">Cost Function</text>
+      <text x="65" y="35" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">LOS + Slew + Priority</text>
+    </g>
+
+    <g transform="translate(305, 40)">
+      <rect width="130" height="50" rx="2" fill="#e0e7ff" stroke="#a5b4fc" />
+      <text x="65" y="20" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#3730a3">Greedy Solver</text>
+      <text x="65" y="35" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">Submodular Opt</text>
+    </g>
+
+    <text x="225" y="115" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#64748b">Multi-Center Planner</text>
+    <text x="225" y="130" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#64748b">Weighted Set-Cover</text>
+  </g>
+
+  <!-- Arrows: Inputs to Decision Layer -->
+  <path d="M400 180 L400 245" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M660 180 L660 215 Q660 225 650 225 L635 225 Q625 225 625 235 L625 245" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="540" y="220" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#64748b">LOS Quality Vector</text>
+
+  <!-- Layer 5: Effector Abstraction -->
+  <g transform="translate(300, 450)">
+    <rect width="200" height="100" rx="4" fill="#fef2f2" stroke="#ef4444" stroke-width="2" filter="url(#shadow)" />
+    <text x="100" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#b91c1c">Effector Abstraction</text>
+    <text x="100" y="45" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">Opaque Interface</text>
+    <rect x="30" y="55" width="140" height="30" rx="2" fill="#fee2e2" stroke="#fca5a5" />
+    <text x="100" y="73" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#b91c1c">simulate_engagement()</text>
+  </g>
+
+  <!-- Arrow: Decision to Effector -->
+  <line x1="400" y1="400" x2="400" y2="445" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="420" y="425" font-family="Arial, sans-serif" font-size="9" fill="#64748b">Assignment Vector</text>
+
+  <!-- Layer 6: Output -->
+  <g transform="translate(570, 450)">
+    <rect width="180" height="100" rx="4" fill="#f8fafc" stroke="#64748b" stroke-width="2" stroke-dasharray="5,5" filter="url(#shadow)" />
+    <text x="90" y="25" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#334155">Output</text>
+    <text x="90" y="50" font-family="monospace" font-size="10" text-anchor="middle" fill="#475569">SimulatedOutcome</text>
+    <text x="90" y="65" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#64748b">EffectSimulated</text>
+    <text x="90" y="77" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#64748b">Miss</text>
+  </g>
+
+  <!-- Arrow: Effector to Output -->
+  <line x1="500" y1="500" x2="565" y2="500" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="532" y="495" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#64748b">Result</text>
+
+  <!-- Annotations -->
+  <text x="50" y="620" font-family="Arial, sans-serif" font-size="10" fill="#64748b">Note: Effector Trait is sealed. No real hardware path. Output is a Rust value (SimulatedOutcome), not a physical command.</text>
+
+</svg>
